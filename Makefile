@@ -6,7 +6,7 @@
 #    By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/22 13:25:32 by kfalia-f          #+#    #+#              #
-#    Updated: 2019/11/22 13:57:25 by kfalia-f         ###   ########.fr        #
+#    Updated: 2020/01/24 18:24:47 by kfalia-f         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 NAME = lem_in
@@ -15,7 +15,9 @@ FLAGS = -Wall -Wextra -Werror
 
 SRC = srcs/
 
-SOURCES = $(SRC)main.c
+SOURCES = $(SRC)main.c \
+		  $(SRC)valid.c \
+		  $(SRC)lists.c
 
 LIB_FOLD = libft/
 
@@ -26,7 +28,7 @@ OBJ = $(SOURCES:.c=.o)
 HEADERS = -I includes -I $(LIB_FOLD)includes
 
 %.o: %.c includes/lem_in.h libft/includes/libft.h
-	@gcc $(FLAGS) -c $< -o $@ $(HEADERS)
+	@gcc $(FLAGS) $(HEADERS) -c $< -o $@
 
 all: $(NAME)
 

@@ -6,7 +6,7 @@
 /*   By: koparker <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 17:37:14 by koparker          #+#    #+#             */
-/*   Updated: 2019/10/03 18:55:19 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2019/09/02 21:00:42 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 ** for get_next_line
 */
 
+# define BUFF_SIZE	1
 # define MAX_FDS	1024
 
 # include <stdlib.h>
@@ -59,7 +60,6 @@ char				*ft_strrchr(const char *s, int c);
 int					ft_strcmp(const char *s1, const char *s2);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
 int					ft_atoi(const char *str);
-long long			ft_atoil(const char *str);
 int					ft_isalpha(int c);
 int					ft_isdigit(int c);
 int					ft_isalnum(int c);
@@ -97,7 +97,7 @@ int					ft_strequ(char const *s1, char const *s2);
 int					ft_strnequ(char const *s1, char const *s2i, size_t n);
 char				*ft_strsub(char const *s, unsigned int start, size_t len);
 char				*ft_strjoin(char const *s1, char const *s2);
-char				*ft_strjoinre(char *s1, const char *s2);
+char				*ft_strjoinre(char *s1, char *s2, int flag);
 char				*ft_strtrim(char const *s);
 char				**ft_strsplit(char const *s, char c);
 void				ft_putchar(char c);
@@ -117,6 +117,7 @@ char				*ft_ls_path_to_file(char *path, int flag);
 
 int					get_next_line(const int fd, char **line);
 
+char				*ft_itoa_unsig(unsigned long long int n);
 char				*ft_first_word(char *str);
 void				ft_mass2del(char ***a);
 #endif
