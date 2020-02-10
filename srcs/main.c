@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 13:20:38 by kfalia-f          #+#    #+#             */
-/*   Updated: 2020/01/27 17:20:14 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2020/02/10 21:01:39 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int		main()
 	t_tb	table;
 
 	ft_new_tb(&table);
-	ft_valid(&table);
+	ft_read_stdin(&table);
+	ft_table_del(&table);
 	return (0);
 }
