@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 13:18:40 by kfalia-f          #+#    #+#             */
-/*   Updated: 2020/01/27 17:59:30 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2020/02/10 19:59:00 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ typedef struct		s_tb
 }					t_tb;
 
 //valid.c
-int					ft_valid(t_tb *table);
+void				ft_valid(t_tb *table);
 
 //lists.c
 void				ft_new_tb(t_tb *table);
