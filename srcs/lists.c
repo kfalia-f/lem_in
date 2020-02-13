@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/24 18:23:44 by kfalia-f          #+#    #+#             */
-/*   Updated: 2020/02/13 22:08:15 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2020/02/13 22:11:41 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ unsigned int	ft_lst_lenght(t_map *map)
 	while (tmp)
 	{
 		i++;
-		printf("%s\n", tmp->cont);
+		//printf("%s\n", tmp->cont);
 		tmp = tmp->next;
 	}
 	return (i);

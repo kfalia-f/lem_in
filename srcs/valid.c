@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/24 17:31:30 by kfalia-f          #+#    #+#             */
-/*   Updated: 2020/02/13 22:08:13 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2020/02/13 22:10:57 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	ft_read_stdin(t_tb *table)
 	while (str && *str != '\0')
 	{
 		tmp->cont = str;
+		str = NULL;
 		if (get_next_line(0, &str) > 0)
 		{
 			tmp->next = ft_new_list();
