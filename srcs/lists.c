@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/24 18:23:44 by kfalia-f          #+#    #+#             */
-/*   Updated: 2020/02/10 21:10:19 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2020/02/13 22:06:37 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_map			*ft_new_list()
 
 void	ft_new_tb(t_tb *table)
 {
-	table = (t_tb *)malloc(sizeof(*table));
+	//table = (t_tb *)malloc(sizeof(*table));
 	table->flag = 0;
 	table->head = table->map;
 }
@@ -44,9 +44,10 @@ unsigned int	ft_lst_lenght(t_map *map)
 
 	i = 0;
 	tmp = map;
-	while (tmp->cont)
+	while (tmp)
 	{
 		i++;
+		printf("%s\n", tmp->cont);
 		tmp = tmp->next;
 	}
 	return (i);
@@ -54,20 +55,14 @@ unsigned int	ft_lst_lenght(t_map *map)
 
 void			ft_table_del(t_tb *table)
 {
-	t_map	*tmp;
-
-	ft_putstr(table->head->cont);
-	if (table->map)
-		tmp = table->map->next;
-	while (table->map->cont)
+	t_map	*iter;
+	t_map	*iter_pr;
+	
+	iter = table->map;
+	while (iter)
 	{
-		ft_list_del(&(table->map));           ////////////Bag
-		ft_putstr("FLAG\n");
-		table->map = tmp;
-		if (table->map->next)
-			tmp = table->map->next;
+		iter_pr = iter;
+		iter = iter->next;
+		ft_list_del(&iter_pr);
 	}
-	//free(table->map);
-	//free(table->head);
-	free(table);
 }

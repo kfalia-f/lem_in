@@ -3,104 +3,71 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: koparker <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/08 22:57:29 by koparker          #+#    #+#             */
-/*   Updated: 2019/04/28 13:25:18 by koparker         ###   ########.fr       */
+/*   Created: 2018/12/12 17:59:13 by kfalia-f          #+#    #+#             */
+/*   Updated: 2020/02/13 21:25:09 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
 
-/*
-** task-specific strjoin function.
-** In the first call of the gnl-function holder is empty,
-** so it's strduped with buf value. In other cases it joins
-** existing holder and new buf.
-*/
-
-static char	*ft_strjoin_gnl(char const *s1, char const *s2)
+int		ft_error(char **s, int fd)
 {
-	size_t	i;
-	size_t	len1;
-	size_t	len2;
-	char	*res;
-
-	if (s2 == NULL)
-		return (NULL);
-	if (s1 == NULL)
-		return (ft_strdup(s2));
-	i = 0;
-	len1 = ft_strlen(s1);
-	len2 = ft_strlen(s2);
-	if (!(res = ft_strnew(len1 + len2 + 2)))
-		return (NULL);
-	while (i < (len1 + len2))
-	{
-		if (i < len1)
-			res[i] = s1[i];
-		else if (i - len1 < len2)
-			res[i] = s2[i - len1];
-		i++;
-	}
-	return (res);
+	ft_strdel(&(s[fd]));
+	return (-1);
 }
 
-static void	read_line(int fd, char **holder, char *buf)
+int		ft_zap(const int fd, char **line, char **a)
 {
-	int		ret;
-	char	*tmp;
+	char	*str;
+	int		i;
 
+	i = 0;
+	while (a[fd][i] != '\n' && a[fd][i] != '\0')
+		i++;
+	if (a[fd][i] == '\n')
+	{
+		if ((*line = ft_strsub(a[fd], 0, i)) == NULL)
+			return (ft_error(&(a[fd]), fd));
+		if ((str = ft_strdup(a[fd] + i + 1)) == NULL)
+			return (ft_error(&(a[fd]), fd));
+		free(a[fd]);
+		a[fd] = str;
+	}
+	else
+	{
+		if ((*line = ft_strdup(a[fd])) == NULL)
+			return (ft_error(&(a[fd]), fd));
+		ft_strdel(&(a[fd]));
+	}
+	return (1);
+}
+
+int		get_next_line(const int fd, char **line)
+{
+	static char	*a[10240];
+	char		*str;
+	int			ret;
+	char		buf[BUFF_SIZE + 1];
+
+	if (fd < 0 || !line || BUFF_SIZE <= 0 || ((ret = read(fd, buf, 0)) < 0))
+		return (-1);
+	if (a[fd] == NULL)
+		if ((a[fd] = ft_strnew(0)) == NULL)
+			return (-1);
 	while ((ret = read(fd, buf, BUFF_SIZE)) > 0)
 	{
 		buf[ret] = '\0';
-		tmp = holder[fd];
-		holder[fd] = ft_strjoin_gnl(tmp, buf);
-		free(tmp);
-		if (ft_strchr(holder[fd], '\n') != NULL)
+		if ((str = ft_strjoinre(a[fd], buf, 1)) == NULL)
+			return (ft_error(&(a[fd]), fd));
+		a[fd] = str;
+		if (ft_strchr(buf, '\n'))
 			break ;
 	}
-}
-
-static int	write_line(int fd, char **holder, char **line)
-{
-	char	*tmp;
-	char	*tmp2;
-	size_t	idx;
-
-	if ((tmp = ft_strchr(holder[fd], '\n')) != NULL)
-	{
-		idx = tmp - holder[fd];
-		*line = ft_strsub(holder[fd], 0, idx);
-		tmp2 = holder[fd];
-		holder[fd] = ft_strdup(&tmp2[idx] + 1);
-		free(tmp2);
-		return (1);
-	}
-	if (*holder[fd])
-	{
-		*line = ft_strdup(holder[fd]);
-		free(holder[fd]);
-		holder[fd] = NULL;
-		return (1);
-	}
-	free(holder[fd]);
-	holder[fd] = NULL;
-	return (0);
-}
-
-int			get_next_line(const int fd, char **line)
-{
-	static char		*holder[MAX_FDS];
-	char			*buf;
-
-	if (fd < 0 || read(fd, NULL, 0) < 0 || line == NULL || BUFF_SIZE <= 0)
+	if (ret < 0)
 		return (-1);
-	if (!(buf = ft_memalloc(BUFF_SIZE + 1)))
-		return (-1);
-	read_line(fd, holder, buf);
-	free(buf);
-	if (holder[fd])
-		return (write_line(fd, holder, line));
-	return (0);
+	else if (ret == 0 && (a[fd] == NULL || a[fd][0] == '\0'))
+		return (0);
+	return (ft_zap(fd, line, a));
 }
