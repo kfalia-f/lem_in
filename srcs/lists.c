@@ -6,26 +6,29 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/24 18:23:44 by kfalia-f          #+#    #+#             */
-/*   Updated: 2020/02/13 22:11:41 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2020/02/15 21:18:54 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <lem_in.h>
 
-t_map			*ft_new_list()
+t_map			*ft_new_list(t_tb *table)
 {
 	t_map	*map;
 
 	map = (t_map *)malloc(sizeof(*map));
 	map->cont = NULL;
 	map->next = NULL;
+	table->map_len++;
 	return (map);
 }
 
 void	ft_new_tb(t_tb *table)
 {
 	//table = (t_tb *)malloc(sizeof(*table));
-	table->flag = 0;
+	table->flag = -1;
+	table->room_num = 0;
+	table->map_len = 0;
 	table->head = table->map;
 }
 
