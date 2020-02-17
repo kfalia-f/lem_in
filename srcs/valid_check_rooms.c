@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 20:54:29 by kfalia-f          #+#    #+#             */
-/*   Updated: 2020/02/15 21:18:46 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2020/02/17 20:55:52 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,20 @@ int     ft_check_room_help(char *str)
 	return (1);
 }
 
+void	ft_room(t_tb *table, char *str)
+{
+	unsigned int		i;
+	t_rooms 			*tmp;
+
+	i = 0;
+	tmp = table->rooms;
+	while (i < table->room_num)
+		tmp = tmp->next;
+	tmp = ft_new_room(str);
+	if (table->room_num == 0)
+		table->r_head = tmp;
+}
+
 int     ft_check_room(t_tb *table, char *str)
 {
 	if (ft_check_command(str) == 2)
@@ -88,6 +102,7 @@ int     ft_check_room(t_tb *table, char *str)
 		return (0);
 	if (table->flag == 4)
 		table->flag = 1;
+	ft_room(table, str);
 	table->room_num++;
 	return (1);
 }

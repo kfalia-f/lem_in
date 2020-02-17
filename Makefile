@@ -6,7 +6,7 @@
 #    By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/22 13:25:32 by kfalia-f          #+#    #+#              #
-#    Updated: 2020/02/15 20:56:12 by kfalia-f         ###   ########.fr        #
+#    Updated: 2020/02/17 20:51:58 by kfalia-f         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 NAME = lem_in
@@ -18,8 +18,10 @@ SRC = srcs/
 SOURCES = $(SRC)main.c \
 		  $(SRC)valid.c \
 		  $(SRC)lists.c \
+		  $(SRC)lists_2.c \
 		  $(SRC)valid_helpers.c \
-		  $(SRC)valid_check_rooms.c
+		  $(SRC)valid_check_rooms.c \
+		  $(SRC)valid_check_links.c
 
 LIB_FOLD = libft/
 

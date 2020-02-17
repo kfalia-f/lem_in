@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/24 17:31:30 by kfalia-f          #+#    #+#             */
-/*   Updated: 2020/02/15 21:18:52 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2020/02/17 20:16:23 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,12 @@ int		ft_str_valid(t_tb *table, char *str)
 			ft_error_input(table);
 	}
 	else if (table->flag == 0 || table->flag == 4)
+	{
 		if (ft_check_room(table, str) == 0)
 			ft_error_input(table);
+	}
+	else if (ft_check_links(table, str) == 0)
+		ft_error_input(table);
 	return (1);
 }
 
