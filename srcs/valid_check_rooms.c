@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 20:54:29 by kfalia-f          #+#    #+#             */
-/*   Updated: 2020/02/17 20:55:52 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2020/02/18 20:41:41 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,12 @@ void	ft_room(t_tb *table, char *str)
 
 	i = 0;
 	tmp = table->rooms;
-	while (i < table->room_num)
+	while (tmp)
 		tmp = tmp->next;
-	tmp = ft_new_room(str);
+	while (str[i] && str[i] != ' ')
+		i++;
+	tmp = ft_new_room(str, i);
+	printf("%d, name = %s\n", table->room_num, tmp->name);
 	if (table->room_num == 0)
 		table->r_head = tmp;
 }

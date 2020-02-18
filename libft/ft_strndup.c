@@ -1,24 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lists_2.c                                          :+:      :+:    :+:   */
+/*   ft_strndup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/17 20:40:11 by kfalia-f          #+#    #+#             */
-/*   Updated: 2020/02/18 20:45:54 by kfalia-f         ###   ########.fr       */
+/*   Created: 2020/02/18 20:42:08 by kfalia-f          #+#    #+#             */
+/*   Updated: 2020/02/18 20:45:26 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <lem_in.h>
+#include <libft.h>
 
-t_rooms		*ft_new_room(char *str, int n)
+char	*ft_strndup(char *str, int n)
 {
-	t_rooms	*new;
+	char	*res;
+	int		i;
 
-	new = (t_rooms *)malloc(sizeof(*new));
-	new->name = ft_strndup(str, n);
-	new->next = NULL;
-	new->links = NULL;
-	return (new);
+	res = (char *)malloc(sizeof(char) * n + 1);
+	i = 0;
+	while (i < n)
+	{
+		res[i] = str[i];
+		i++;
+	}
+	res[i] = '\0';
+	return (res);
 }

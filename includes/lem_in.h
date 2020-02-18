@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 13:18:40 by kfalia-f          #+#    #+#             */
-/*   Updated: 2020/02/17 20:55:58 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2020/02/18 20:46:12 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct		s_ln
 typedef struct		s_rooms
 {
 	char			*name;
+	size_t			r_flag;
 	t_ln			*links;
 	struct s_rooms	*next;
 }					t_rooms;
@@ -52,7 +53,7 @@ void				ft_read_stdin(t_tb *table);
 //lists.c
 void				ft_new_tb(t_tb *table);
 t_map				*ft_new_list();
-t_rooms				*ft_new_room(char *str);
+t_rooms				*ft_new_room(char *str, int n);
 void				ft_list_del(t_map **list);
 unsigned int		ft_lst_lenght(t_map *map);
 void				ft_table_del(t_tb *table);
