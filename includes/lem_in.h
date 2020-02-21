@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 13:18:40 by kfalia-f          #+#    #+#             */
-/*   Updated: 2020/02/18 20:46:12 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2020/02/21 19:33:18 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,11 @@ typedef struct		s_ln
 
 typedef struct		s_rooms
 {
+	struct s_rooms	*next;
+	t_ln			*links;
+	unsigned int	num_of_links;
 	char			*name;
 	size_t			r_flag;
-	t_ln			*links;
-	struct s_rooms	*next;
 }					t_rooms;
 
 typedef struct		s_tb
