@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 20:54:29 by kfalia-f          #+#    #+#             */
-/*   Updated: 2020/02/18 20:41:41 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2020/02/22 20:09:46 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,33 +79,48 @@ int     ft_check_room_help(char *str)
 void	ft_room(t_tb *table, char *str)
 {
 	unsigned int		i;
-	t_rooms 			*tmp;
+	t_rooms				*tmp;
 
 	i = 0;
 	tmp = table->rooms;
-	while (tmp)
-		tmp = tmp->next;
+	if (table->room_num != 0)
+	{
+		while (tmp)
+			tmp = tmp->next;
+		tmp = ft_new_room();
+	}
 	while (str[i] && str[i] != ' ')
 		i++;
-	tmp = ft_new_room(str, i);
-	printf("%d, name = %s\n", table->room_num, tmp->name);
-	if (table->room_num == 0)
-		table->r_head = tmp;
+	//printf ("i = %d, str = %s\n", i, str);
+	tmp->name = ft_strndup(str, i); // <------------- here is sega
+	if (table->flag == 4)
+		tmp->r_flag = 2;
+	else if (table->flag == 3)
+		tmp->r_flag = 1;
+	else
+		tmp->r_flag = 0;
+	printf("%d, name = %s\n", tmp->r_flag, tmp->name);
 }
 
 int     ft_check_room(t_tb *table, char *str)
 {
 	if (ft_check_command(str) == 2)
 		table->flag = 4;
+	if (ft_check_command(str) == 1)
+		table->flag = 3;
 	if (ft_check_command(str) != 0)
 		return (1);
+	if (ft_check_lnk(str) == 1)
+		return ((table->flag = 1));
 	if (ft_check_room_help(str) == 0)
 		return (0);
 	if (ft_check_coord(str) == 0)
 		return (0);
-	if (table->flag == 4)
-		table->flag = 1;
+	if (table->room_num == 0)
+		table->rooms = ft_new_room();
 	ft_room(table, str);
+//	if (table->flag == 4)
+//		table->flag = 1;
 	table->room_num++;
 	return (1);
 }
