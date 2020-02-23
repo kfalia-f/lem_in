@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 18:09:49 by kfalia-f          #+#    #+#             */
-/*   Updated: 2020/02/23 16:36:45 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2020/02/23 18:10:01 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int		ft_check_first(t_tb *table, char *str)
 			return (0);
 		i++;
 	}
+	table->num_of_ants = num;
 	table->flag = 0;
 	return (1);
 }

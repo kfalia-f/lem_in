@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 20:14:49 by kfalia-f          #+#    #+#             */
-/*   Updated: 2020/02/23 16:57:15 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2020/02/23 17:41:44 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int		ft_check_minus(char *str)
 	return (1);
 }
 
-int		ft_check_largs(t_rooms *head, char *str)
+int		ft_check_largs(t_tb *table, t_rooms *head, char *str)
 {
 	int		i;
 	char	**args;
@@ -67,6 +67,8 @@ int		ft_check_largs(t_rooms *head, char *str)
 			arg[1] = 1;
 		head = head->next;
 	}
+	if (arg[0] == 1 && arg[1] == 1)
+		ft_remember_link(table, args);
 	ft_mass2del(&args);
 	if (arg[0] == 1 && arg[1] == 1)
 		return (1);
@@ -100,7 +102,7 @@ int		ft_check_links(t_tb *table, char *str)
 		return (0);
 	if (ft_check_start_end(table->rooms) == 0)
 		ft_error_input(table, 3);
-	if (ft_check_largs(table->r_head, str) == 0)
+	if (ft_check_largs(table, table->r_head, str) == 0)
 		return (0);
 	return (1);
 }
