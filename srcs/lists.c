@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/24 18:23:44 by kfalia-f          #+#    #+#             */
-/*   Updated: 2020/02/22 19:43:39 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2020/02/23 16:16:29 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,8 @@ t_map			*ft_new_list(t_tb *table)
 void	ft_new_tb(t_tb *table)
 {
 	//table = (t_tb *)malloc(sizeof(*table));
+	ft_bzero(table, sizeof(t_tb));
 	table->flag = -1;
-	table->room_num = 0;
-	table->map_len = 0;
-	table->head = table->map;
-	table->r_head = table->rooms;
 }
 
 void			ft_list_del(t_map **list)

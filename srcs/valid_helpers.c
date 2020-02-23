@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 18:09:49 by kfalia-f          #+#    #+#             */
-/*   Updated: 2020/02/22 18:01:59 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2020/02/23 16:36:45 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void	ft_error_input(t_tb *table, int num)
 		ft_putstr_fd("(wrong room syntax)\n", 2);
 	else if (num == 2)
 		ft_putstr_fd("(wrong links syntax)\n", 2);
+	else if (num == 3)
+		ft_putstr_fd("(not enough information)\n", 2);
 	ft_table_del(table);
 	exit(EXIT_FAILURE);
 }

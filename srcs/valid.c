@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/24 17:31:30 by kfalia-f          #+#    #+#             */
-/*   Updated: 2020/02/22 20:11:23 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2020/02/23 16:58:56 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@ void	ft_validation(t_tb *table)
 	unsigned int	lst_len;
 
 	lst_len = ft_lst_lenght(table->map);
-	ft_putchar('\n');
+	/*ft_putchar('\n');
 	printf("table->map_len = %d\n", table->map_len);
 	printf("table->room_num = %d\n", table->room_num);
-	while (table->rooms)
+	while (table->r_head)
 	{
-		printf("%s\n", table->rooms->name);
-		table->rooms = table->rooms->next;
-	}
+		printf("%s\n", table->r_head->name);
+		table->r_head = table->r_head->next;
+	}*/
 	//ft_putnbr(lst_len);
 	
 }

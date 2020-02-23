@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 20:54:29 by kfalia-f          #+#    #+#             */
-/*   Updated: 2020/02/22 20:09:46 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2020/02/23 16:57:05 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,21 @@ int     ft_check_room_help(char *str)
 	return (1);
 }
 
+void	ft_write_to_room(t_rooms *tmp, char *str, int i, int flag)
+{
+	while (tmp->next)
+		tmp = tmp->next;
+	tmp->next = ft_new_room();
+	tmp->next->name = ft_strndup(str, i); // <------------- here is sega
+	if (flag == 4)
+		tmp->next->r_flag = 2;
+	else if (flag == 3)
+		tmp->next->r_flag = 1;
+	else
+		tmp->next->r_flag = 0;
+	//printf("%d, name = %s\n", tmp->next->r_flag, tmp->next->name);
+}
+
 void	ft_room(t_tb *table, char *str)
 {
 	unsigned int		i;
@@ -83,23 +98,22 @@ void	ft_room(t_tb *table, char *str)
 
 	i = 0;
 	tmp = table->rooms;
-	if (table->room_num != 0)
-	{
-		while (tmp)
-			tmp = tmp->next;
-		tmp = ft_new_room();
-	}
 	while (str[i] && str[i] != ' ')
 		i++;
-	//printf ("i = %d, str = %s\n", i, str);
-	tmp->name = ft_strndup(str, i); // <------------- here is sega
-	if (table->flag == 4)
-		tmp->r_flag = 2;
-	else if (table->flag == 3)
-		tmp->r_flag = 1;
+	if (table->room_num != 0)
+		ft_write_to_room(tmp, str, i, table->flag);
 	else
-		tmp->r_flag = 0;
-	printf("%d, name = %s\n", tmp->r_flag, tmp->name);
+	{
+		tmp->name = ft_strndup(str, i);
+	//printf ("i = %d, str = %s\n", i, str);
+		if (table->flag == 4)
+			tmp->r_flag = 2;
+		else if (table->flag == 3)
+			tmp->r_flag = 1;
+		else
+			tmp->r_flag = 0;
+	}
+	table->flag = 0;
 }
 
 int     ft_check_room(t_tb *table, char *str)
@@ -117,7 +131,10 @@ int     ft_check_room(t_tb *table, char *str)
 	if (ft_check_coord(str) == 0)
 		return (0);
 	if (table->room_num == 0)
+	{
 		table->rooms = ft_new_room();
+		table->r_head = table->rooms;
+	}
 	ft_room(table, str);
 //	if (table->flag == 4)
 //		table->flag = 1;

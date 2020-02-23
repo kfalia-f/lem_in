@@ -6,7 +6,7 @@
 /*   By: kfalia-f <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 20:14:49 by kfalia-f          #+#    #+#             */
-/*   Updated: 2020/02/22 19:18:22 by kfalia-f         ###   ########.fr       */
+/*   Updated: 2020/02/23 16:57:15 by kfalia-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,10 @@ int		ft_check_largs(t_rooms *head, char *str)
 	args = ft_strsplit(str, '-');
 	while (head)
 	{
-		printf("arg = %s, name = %s\n", args[0], head->name);
+		//printf("arg = %s, name = %s\n", args[0], head->name);
 		if (ft_strcmp(head->name, args[0]) == 0)
 			arg[0] = 1;
-		printf("arg = %s, name = %s\n", args[1], head->name);
+		//printf("arg = %s, name = %s\n", args[1], head->name);
 		if (ft_strcmp(head->name, args[1]) == 0)
 			arg[1] = 1;
 		head = head->next;
@@ -73,10 +73,33 @@ int		ft_check_largs(t_rooms *head, char *str)
 	return (0);
 }
 
+int		ft_check_start_end(t_rooms *head)
+{
+	t_rooms	*tmp;
+	int		i;
+
+	i = 0;
+	tmp = head;
+	while (tmp)
+	{
+		if (tmp->r_flag == 1)
+			i++;
+		if (tmp->r_flag == 2)
+			i++;
+		tmp = tmp->next;
+	}
+	//printf("I == %d\n", i);
+	if (i != 2)
+		return (0);
+	return (1);
+}
+
 int		ft_check_links(t_tb *table, char *str)
 {
 	if (ft_check_minus(str) == 0)
 		return (0);
+	if (ft_check_start_end(table->rooms) == 0)
+		ft_error_input(table, 3);
 	if (ft_check_largs(table->r_head, str) == 0)
 		return (0);
 	return (1);
