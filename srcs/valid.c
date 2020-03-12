@@ -12,13 +12,31 @@
 
 //Reading map from stdin and validation
 
+/*
+----File valid.c----
+В этом файле происходит считывание из stdin, валидация каждой строки,
+ее парсинг и запись в соответствующую структуру.
+
+ft_read_stdin
+Функция считывает из stdin строку до первого \n и
+передает эту строку ft_validationi, а также
+записывает ее в map
+
+ft_validaton
+Функция, в зависимости от этапа валидации, проверяет строку на валидность,
+отправляя ее в различные функции. Своего рода балансер.
+В случае получения кода ошибки из какой-либо функции вызывается функция
+ft_error_input, в которой чистится структура table и выводится ошибка.
+Про статусы валидации читай в lists.c [ft_new_tb]
+*/
+
 #include <lem_in.h>
 
 void	ft_validation(t_tb *table)
 {
-	unsigned int	lst_len;
+	//unsigned int	lst_len;
 
-	lst_len = ft_lst_lenght(table->map);
+	//lst_len = ft_lst_lenght(table->map);
 	ft_print_all(table);
 }
 

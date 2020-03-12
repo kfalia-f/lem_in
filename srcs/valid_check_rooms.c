@@ -10,6 +10,30 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+/*
+----File valid_check_rooms.c----
+Функции в этом файле предназначены для проверки валиднасти комнаты.
+
+ft_check_arg
+Функция проверяет отдельно взятый аргумент, содержащий координату
+комнаты. Идет проверка на то, что координата >= 0
+
+ft_check_coord
+Функция проверяте координаты комнаты.
+Должно быть строго два числа, разделенных пробелом.
+
+ft_check_room_help
+Функция проверяет количество пробелов и табуляций в строке.
+Проверяет отсутствие знака "-" в строке.
+
+ft_write_to_room
+Функция записывает данные о комнате в список rooms.
+
+ft_check_room
+Функция-балансер. Вызывает функции проверки отдельно взятых аспектов
+валидации строки.
+*/
+
 #include <lem_in.h>
 
 int		ft_check_arg(char *str, int i)
@@ -76,10 +100,14 @@ int     ft_check_room_help(char *str)
 	return (1);
 }
 
-void	ft_write_to_room(t_rooms *tmp, char *str, int i, int flag)
+int		ft_write_to_room(t_rooms *tmp, char *str, int i, int flag)
 {
 	while (tmp->next)
+	{
+		if (!(ft_strncmp(str, tmp->name, i)))
+			return (0);
 		tmp = tmp->next;
+	}
 	tmp->next = ft_new_room();
 	tmp->next->name = ft_strndup(str, i); // <------------- here is sega
 	if (flag == 4)
@@ -89,6 +117,7 @@ void	ft_write_to_room(t_rooms *tmp, char *str, int i, int flag)
 	else
 		tmp->next->r_flag = 0;
 	//printf("%d, name = %s\n", tmp->next->r_flag, tmp->next->name);
+	return (1);
 }
 
 void	ft_room(t_tb *table, char *str)
@@ -101,7 +130,10 @@ void	ft_room(t_tb *table, char *str)
 	while (str[i] && str[i] != ' ')
 		i++;
 	if (table->room_num != 0)
-		ft_write_to_room(tmp, str, i, table->flag);
+	{
+		if (ft_write_to_room(tmp, str, i, table->flag) == 0)
+			ft_error_input(table, 4);
+	}
 	else
 	{
 		tmp->name = ft_strndup(str, i);

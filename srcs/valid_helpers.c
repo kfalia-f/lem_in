@@ -10,6 +10,27 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+/*
+----File valid_helpers.c----
+Все функции в файле - функции-помощники. Мелкие функции, необходимые
+для работы валидации. Эти функции нельзя включить ни в один другой файл.
+
+ft_error_input
+Функция предназначена для вывода ошибки на экран, очистки памяти и завершения
+выполнения программы с ошибкой.
+
+ft_check_command
+Функция определяет тип команды:
+	-1 - комментарий или невалидная команда
+	0 - любая строка, не являющаяся командой
+	1 - команда ##start
+	2 - команда ##end
+
+ft_check_first
+Функция проверяет, что первая поданная строка содержит число >= 0.
+Это число записывается как num_of_ants в структуру table.
+*/
+
 #include <lem_in.h>
 
 void	ft_error_input(t_tb *table, int num)
@@ -23,11 +44,13 @@ void	ft_error_input(t_tb *table, int num)
 		ft_putstr_fd("(wrong links syntax)\n", 2);
 	else if (num == 3)
 		ft_putstr_fd("(not enough information)\n", 2);
+    else if (num == 4)
+		ft_putstr_fd("(duplicate room name)\n", 2);
 	ft_table_del(table);
 	exit(EXIT_FAILURE);
 }
 
-int		ft_check_command(char *str) //-1 - comment or invalid command, 0 - not command, 1 - start, 2 - end
+int		ft_check_command(char *str)
 {
 	if (!ft_strcmp(str, "##start"))
 		return (1);
