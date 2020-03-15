@@ -30,13 +30,20 @@ typedef struct		s_ln
 
 typedef struct		s_rooms
 {
-	struct s_rooms	*next;
 	t_ln			*links;
 	unsigned int	num_of_links;
 	char			*name;
+	int				level;
 	int				r_flag;
 	int				busy;
+	struct s_rooms	*next;
 }					t_rooms;
+
+typedef struct			s_queue
+{
+	t_rooms				*room;
+	struct s_queue		*next;
+}						t_queue;
 
 typedef struct		s_tb
 {
@@ -48,6 +55,8 @@ typedef struct		s_tb
 	t_map			*head;
 	t_rooms			*rooms;
 	t_rooms			*r_head;
+	t_rooms			*start;
+	t_rooms 		*end;
 }					t_tb;
 
 //valid.c
@@ -72,5 +81,9 @@ int					ft_check_first(t_tb *table, char *str);
 void				ft_remember_link(t_tb *table, char **args);
 
 void				ft_print_all(t_tb *table);          //<------------ delete it
+
+
+//algo
+void find_path(t_tb *table);
 
 # endif

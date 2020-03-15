@@ -18,6 +18,7 @@ int		main()
 
 	ft_new_tb(&table);
 	ft_read_stdin(&table);
+	find_path(&table);
 	ft_table_del(&table);
 	return (0);
 }
