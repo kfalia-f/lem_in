@@ -40,3 +40,44 @@ t_ln		*ft_new_link(char *name)
 	ln->name = ft_strdup(name);
 	return (ln);
 }
+
+void        ft_links_del(t_ln **lnk)
+{
+    ft_strdel(&((*lnk)->name));
+    //free((*lnk)->next);                 //<-------------abort
+    (*lnk)->next = NULL;
+}
+
+void        ft_rm_del(t_rooms **room)
+{
+    t_ln    *tmp;
+    t_ln    *pr_tmp;
+
+    tmp = (*room)->links;
+    ft_strdel(&((*room)->name));
+    free((*room)->next);
+    (*room)->next = NULL;
+    while (tmp)
+    {
+        pr_tmp = tmp;
+        tmp = tmp->next;
+        ft_links_del(&pr_tmp);
+    }
+    free((*room)->links);
+    (*room)->links = NULL;
+}
+
+void		ft_room_del(t_tb *table)
+{
+	t_rooms	*iter;
+	t_rooms	*iter_pr;
+	
+	iter = table->rooms;
+	while (iter)
+	{
+		iter_pr = iter;
+		iter = iter->next;
+		ft_rm_del(&iter_pr);
+	}
+    free(table->rooms);
+}

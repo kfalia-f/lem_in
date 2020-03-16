@@ -32,6 +32,7 @@ typedef struct		s_rooms
 {
 	struct s_rooms	*next;
 	t_ln			*links;
+    struct s_rooms  **lnk_to_room;
 	unsigned int	num_of_links;
 	char			*name;
 	int				r_flag;
@@ -66,10 +67,12 @@ t_ln				*ft_new_link(char *name);
 void				ft_list_del(t_map **list);
 unsigned int		ft_lst_lenght(t_map *map);
 void				ft_table_del(t_tb *table);
+void                ft_room_del(t_tb *table);
 
 //helpers
 int					ft_check_first(t_tb *table, char *str);
 void				ft_remember_link(t_tb *table, char **args);
+void                ft_build_map(t_tb *table);
 
 void				ft_print_all(t_tb *table);          //<------------ delete it
 

@@ -38,18 +38,26 @@ ft_check_links
 
 #include <lem_in.h>
 
-int		ft_check_lnk(char *str)
+int		ft_check_str_valid(char *str)
 {
 	int		i;
+    int     args;
 
 	i = 0;
-	while (str[i])
-	{
-		if (str[i] == '-')
-			return (1);
-		i++;
-	}
-	return (0);
+    args = 0;
+	if (ft_isdigit(str[i]))
+        args++;
+    while (str[i] && str[i] != '-')
+        i++;
+    if (str[i] == '-' && ft_isdigit(str[i + 1]) && (i++))
+        args++;
+    while (ft_isdigit(str[i]))
+        i++;
+    if (str[i] != '\0' || args != 2)
+    {
+        return (0);
+    }
+	return (1);
 }
 
 int		ft_check_minus(char *str)
@@ -83,10 +91,10 @@ int		ft_check_largs(t_tb *table, t_rooms *head, char *str)
 	args = ft_strsplit(str, '-');
 	while (head)
 	{
-		//printf("arg = %s, name = %s\n", args[0], head->name);
+	//	printf("arg = %s, name = %s\n", args[0], head->name);
 		if (ft_strcmp(head->name, args[0]) == 0)
 			arg[0] = 1;
-		//printf("arg = %s, name = %s\n", args[1], head->name);
+	//	printf("arg = %s, name = %s\n", args[1], head->name);
 		if (ft_strcmp(head->name, args[1]) == 0)
 			arg[1] = 1;
 		head = head->next;
@@ -122,6 +130,10 @@ int		ft_check_start_end(t_rooms *head)
 
 int		ft_check_links(t_tb *table, char *str)
 {
+    if (ft_check_str_valid(str) == 0)
+    {
+        return (0);
+    }
 	if (ft_check_minus(str) == 0)
 		return (0);
 	if (ft_check_start_end(table->rooms) == 0)

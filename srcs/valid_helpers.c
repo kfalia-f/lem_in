@@ -83,3 +83,17 @@ int		ft_check_first(t_tb *table, char *str)
 	table->flag = 0;
 	return (1);
 }
+
+int     ft_check_lnk(char *str)
+{
+    int     i;
+
+    i = 0;
+    while(str[i])
+    {
+        if (str[i] == '-')
+            return (1);
+        i++;
+    }
+    return (0);
+}

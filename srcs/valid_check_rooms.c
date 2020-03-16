@@ -109,7 +109,7 @@ int		ft_write_to_room(t_rooms *tmp, char *str, int i, int flag)
 		tmp = tmp->next;
 	}
 	tmp->next = ft_new_room();
-	tmp->next->name = ft_strndup(str, i); // <------------- here is sega
+	tmp->next->name = ft_strndup(str, i); // <------------- here is sega UPD: fixed.
 	if (flag == 4)
 		tmp->next->r_flag = 2;
 	else if (flag == 3)

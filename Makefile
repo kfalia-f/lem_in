@@ -23,7 +23,8 @@ SOURCES = $(SRC)main.c \
 		  $(SRC)valid_check_rooms.c \
 		  $(SRC)valid_check_links.c \
 		  $(SRC)remember_links.c \
-		  $(SRC)print_all.c
+		  $(SRC)print_all.c \
+          $(SRC)build_map.c
 
 LIB_FOLD = libft/
 

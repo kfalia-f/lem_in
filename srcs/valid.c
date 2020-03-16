@@ -34,10 +34,18 @@ ft_error_input, в которой чистится структура table и �
 
 void	ft_validation(t_tb *table)
 {
-	//unsigned int	lst_len;
+    /*t_rooms *tmp;
+    //unsigned int	lst_len;
 
 	//lst_len = ft_lst_lenght(table->map);
-	ft_print_all(table);
+    tmp = table->rooms;
+    tmp->lnk_to_room = malloc(sizeof(t_rooms **));
+    tmp->lnk_to_room[0] = malloc(sizeof(t_rooms *));
+    table->rooms->lnk_to_room[0] = tmp->next;
+    printf("%d\n", tmp->lnk_to_room[0]->r_flag);
+    */
+    ft_build_map(table);
+    ft_print_all(table);
 }
 
 int		ft_str_valid(t_tb *table, char *str)

@@ -95,4 +95,5 @@ void			ft_table_del(t_tb *table)
 		iter = iter->next;
 		ft_list_del(&iter_pr);
 	}
+    ft_room_del(table);
 }
