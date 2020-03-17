@@ -36,6 +36,9 @@ typedef struct		s_rooms
 	unsigned int	num_of_links;
 	char			*name;
 	int				r_flag;
+    unsigned int    inp_links;
+    unsigned int    out_links;
+    unsigned int    lvl;
 	int				busy;
 }					t_rooms;
 
@@ -48,6 +51,7 @@ typedef struct		s_tb
 	t_map			*map;
 	t_map			*head;
 	t_rooms			*rooms;
+    t_rooms         *r_end;
 	t_rooms			*r_head;
 }					t_tb;
 

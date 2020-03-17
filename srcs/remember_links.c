@@ -55,5 +55,5 @@ void	ft_remember_link(t_tb *table, char **args)
 
 	room = table->rooms;
 	ft_write_links(room, args[0], args[1]);
-	ft_write_links(room, args[1], args[0]);
+	//ft_write_links(room, args[1], args[0]);
 }

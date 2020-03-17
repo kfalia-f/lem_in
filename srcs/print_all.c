@@ -36,7 +36,7 @@ void	ft_print_rooms(t_rooms *room)
 	printf("\n--LINKS--\n");
 	while (tmp)
 	{
-		printf("\nroom name - %s, num of links = %d status - %d\n", tmp->name, tmp->num_of_links, tmp->r_flag);
+		printf("\nroom name - %s, num of links = %d, in_links = %d, out_links = %d, status - %d\n", tmp->name, tmp->num_of_links, tmp->inp_links, tmp->out_links, tmp->r_flag);
 		ft_print_links(tmp->links);
 		tmp = tmp->next;
 	}

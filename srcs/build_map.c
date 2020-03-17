@@ -7,7 +7,7 @@ t_rooms **ft_remake_links(t_tb *table, t_ln *links, int num, char *name)
     int     i;
 
     i = 0;
-    new_links = malloc(sizeof(t_rooms *) * (num + 1));
+    new_links = malloc(sizeof(t_rooms) * (num + 1));
     while (i < num)
         new_links[i++] = malloc(sizeof(t_rooms));
     new_links[i] = NULL;
@@ -18,7 +18,10 @@ t_rooms **ft_remake_links(t_tb *table, t_ln *links, int num, char *name)
         while (ft_strcmp(tmp->name, links->name) != 0 && tmp)
             tmp = tmp->next;
         if (tmp)
+        {
             new_links[i++] = tmp;
+            tmp->inp_links++;
+        }
         links = links->next;
     }
 
@@ -38,11 +41,16 @@ void    ft_rebuild_map(t_tb *table, t_rooms *tmp, t_rooms *tmp_pr, t_rooms *end)
     tmp = table->rooms;
     end = tmp;
     while (end->next)
+    {
+        end->lnk_to_room = ft_remake_links(table, end->links, end->num_of_links, end->name);
+        end->out_links = end->num_of_links;                                                 //<------Можно избавиться
         end = end->next;
+    }
+    table->r_end = end;
+    end->lnk_to_room = ft_remake_links(table, end->links, end->num_of_links, end->name);
     while (tmp->next)
     {
         tmp_pr = tmp;
-        tmp->lnk_to_room = ft_remake_links(table, tmp->links, tmp->num_of_links, tmp->name);
         tmp = tmp->next;
         if (tmp->r_flag == 1)
         {
@@ -50,7 +58,7 @@ void    ft_rebuild_map(t_tb *table, t_rooms *tmp, t_rooms *tmp_pr, t_rooms *end)
             tmp->next = table->rooms;
             table->rooms = tmp;
         }
-        else if (tmp->r_flag == 2)
+        else if (tmp->r_flag == 2 && tmp->next)
         {
             tmp_pr->next = tmp->next;
             tmp->next = NULL;

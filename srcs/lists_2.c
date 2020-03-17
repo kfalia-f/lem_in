@@ -28,6 +28,9 @@ t_rooms		*ft_new_room()
 	t_rooms	*new;
 
 	new = (t_rooms *)ft_memalloc(sizeof(t_rooms));
+    new->out_links = 0;
+    new->inp_links = 0;
+    new->lvl = -1;
 	return (new);
 }
 
