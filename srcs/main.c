@@ -18,6 +18,8 @@ int		main()
 
 	ft_new_tb(&table);
 	ft_read_stdin(&table);
+	set_lvl_vert(&table);
+	rm_unnecessary_links(&table);
 	ft_table_del(&table);
 	return (0);
 }

@@ -30,7 +30,6 @@ typedef struct		s_ln
 
 typedef struct		s_rooms
 {
-	struct s_rooms	*next;
 	t_ln			*links;
     struct s_rooms  **lnk_to_room;
 	unsigned int	num_of_links;
@@ -38,21 +37,32 @@ typedef struct		s_rooms
 	int				r_flag;
     unsigned int    inp_links;
     unsigned int    out_links;
-    unsigned int    lvl;
+    int   			lvl;
 	int				busy;
+	struct s_rooms	*next;
 }					t_rooms;
+
+typedef struct		s_link
+{
+	t_rooms				*start;
+	t_rooms				*end;
+	struct s_link		*next;
+}					t_link;
 
 typedef struct		s_tb
 {
 	int				flag;
+	int				lvl;
 	unsigned int	room_num;
 	unsigned int	map_len;
 	unsigned int	num_of_ants;
 	t_map			*map;
 	t_map			*head;
+	t_link			*links;
 	t_rooms			*rooms;
     t_rooms         *r_end;
 	t_rooms			*r_head;
+
 }					t_tb;
 
 //valid.c
@@ -79,5 +89,18 @@ void				ft_remember_link(t_tb *table, char **args);
 void                ft_build_map(t_tb *table);
 
 void				ft_print_all(t_tb *table);          //<------------ delete it
+
+
+//algo
+typedef struct			s_mp
+{
+	t_rooms				*room;
+	struct s_mp			*next;
+}						t_mp;
+
+
+
+void				set_lvl_vert(t_tb *table);
+void				rm_unnecessary_links(t_tb *table);
 
 # endif
